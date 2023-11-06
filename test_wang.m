@@ -2,6 +2,7 @@
 clc;clear;close all;
 
 addpath(genpath('/Users/chenyk/chenyk/matlibcyk'));
+addpath(genpath('./subroutines'));
 % 
 % %% DEMO script for DL (K-SVD) based denoising
 % ne=20;%number of events;
@@ -119,8 +120,9 @@ perc=7;
 %chenyk.data/students_postdocs/wanghang/urbandas_example/d_in.mat ./
 %chenyk.data/students_postdocs/wanghang/urbandas_example/d_out.mat ./
 
-load d_in.mat;
-load d_out.mat;
+load data/wang_in.mat;
+load data/wang_out.mat;
+
 d=d_in;
 d3=d_out;
 figure('units','normalized','Position',[0.2 0.4 0.8, 0.6],'color','w');
