@@ -1,7 +1,11 @@
 %% THIS IS A SCRIPT TO DEMONSTRATE RESIDUAL DICTIONARY LEARNING FOR SIGNAL LEAKAGE RETRIEVAL
 clc;clear;close all;
 
-addpath(genpath('/Users/chenyk/chenyk/matlibcyk'));
+% addpath(genpath('/Users/chenyk/chenyk/matlibcyk'));
+
+% download https://github.com/chenyk1990/MATseisdl
+
+addpath(genpath('./MATseisdl'));
 addpath(genpath('./subroutines'));
 
 
@@ -42,10 +46,10 @@ imagesc([d,d2,d-d2]);colormap(seis);caxis([-0.01,0.01]);
 
 %% residual learning
 % X=yc_patch(d,mode,l1,l2,s1,s2);
-% [D,G]=yc_sgk(X,param);
+% [D,G]=dl_sgk(X,param);
 % G2=yc_ompN(D,X,T);
 % perc=1;
-% G2=yc_pthresh(G2,'ph',perc);
+% G2=dl_pthresh(G2,'ph',perc);
 % X2=D*G2;
 % d3=yc_patch_inv(X2,mode,n1,n2,l1,l2,s1,s2);
 % figure;imagesc([dc,d,d3,d-d3]);colormap(seis);
@@ -54,10 +58,10 @@ imagesc([d,d2,d-d2]);colormap(seis);caxis([-0.01,0.01]);
 XX=yc_patch(d3,1,l1,l2,s1,s2);
 % XXn=yc_patch(yc_clip(d-d3,-0.02,0.02),1,l1,l2,s1,s2);
 XXn=yc_patch(yc_bandpass(yc_clip(d-d3,-0.04,0.04),0.004,0,40),1,l1,l2,s1,s2);
-[DD,GG]=yc_sgk(XX,param);
+[DD,GG]=dl_sgk(XX,param);
 Gn=yc_ompN(DD,XXn,3);
 perc=1;
-Gn=yc_pthresh(Gn,'ph',perc);
+Gn=dl_pthresh(Gn,'ph',perc);
 Xn=DD*Gn;
 d33=yc_patch_inv(Xn,1,n1,n2,l1,l2,s1,s2);
 d33=yc_mf(d33,5,1,1);
@@ -70,17 +74,17 @@ d4=d3+d33;
 
 
 perc=2;
-d33_1=yc_patch_inv(DD*yc_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
+d33_1=yc_patch_inv(DD*dl_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
 d33_1=yc_mf(d33_1,5,1,1);
 d33_1=yc_mf(d33_1,5,1,1);
 
 perc=0.5;
-d33_2=yc_patch_inv(DD*yc_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
+d33_2=yc_patch_inv(DD*dl_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
 d33_2=yc_mf(d33_2,5,1,1);
 d33_2=yc_mf(d33_2,5,1,1);
 
 perc=0.1;
-d33_3=yc_patch_inv(DD*yc_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
+d33_3=yc_patch_inv(DD*dl_pthresh(yc_ompN(DD,XXn,3),'ph',perc),1,n1,n2,l1,l2,s1,s2);
 d33_3=yc_mf(d33_3,5,1,1);
 d33_3=yc_mf(d33_3,5,1,1);
 
