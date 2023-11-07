@@ -1,11 +1,13 @@
 clc;clear;close all;
 
-addpath(genpath('~/chenyk/matlibcyk/'))
+% download https://github.com/chenyk1990/MATseisdl
+addpath(genpath('./MATseisdl'));
+addpath(genpath('./subroutines'));
 
-fid=fopen('jdas_noisy_650_2048_19.2_0.02s.bin','r');
+fid=fopen('data/jdas_noisy_650_2048_19.2_0.02s.bin','r');
 dn=fread(fid,[2048,650],'float');%figure;imagesc([dn]);caxis([-0.5,0.5]);colormap(seis);
 
-fid=fopen('jdas_denoised_650_2048_19.2_0.02s.bin','r');
+fid=fopen('data/jdas_denoised_650_2048_19.2_0.02s.bin','r');
 d1=fread(fid,[2048,650],'float');%figure;imagesc([dn,d1,dn-d1]);caxis([-0.5,0.5]);colormap(seis);
 
 % fid=fopen('jdas_noise_650_2048_19.2_0.02s.bin','r');
@@ -43,10 +45,10 @@ perc=7;
 XX=yc_patch(d3,1,l1,l2,s1,s2);
 % XXn=yc_patch(yc_clip(d-d3,-0.02,0.02),1,l1,l2,s1,s2);
 XXn=yc_patch(yc_bandpass(yc_clip(d-d3,-10,10),0.004,0,60),1,l1,l2,s1,s2);
-[DD,GG]=yc_sgk(XX,param);
+[DD,GG]=dl_sgk(XX,param);
 Gn=yc_ompN(DD,XXn,3);
 perc=1;
-Gn=yc_pthresh(Gn,'ph',perc);
+Gn=dl_pthresh(Gn,'ph',perc);
 Xn=DD*Gn;
 d33=yc_patch_inv(Xn,1,n1,n2,l1,l2,s1,s2);
 % d33=yc_mf(d33,5,1,1);

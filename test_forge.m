@@ -1,22 +1,17 @@
 
 clc;clear;close all;
 
+% download https://github.com/chenyk1990/MATseisdl
+addpath(genpath('./MATseisdl'));
+addpath(genpath('./subroutines'));
 
-
-% load('~/dasdenoising/mat_raw/eq-3.mat');
-% dn=d1;
-% load('~/dasdenoising/mat_bpsomffk/eq-3.mat');
-% d1=d1;
-
-load('./eq-3.mat');
+load('data/eq-3.mat');
 dn=d1;
-load('./eq-3-d1.mat');
+load('data/eq-3-d1.mat');
 d1=d1;
 figure;yc_imagesc([dn,d1,dn-d1]);
 d2=yc_clip(dn-d1,-50,50);
 figure;yc_imagesc([dn,d1,dn-d1,d2,dn-d1-d2]);
-
-
 
 
 
@@ -51,10 +46,10 @@ perc=7;
 XX=yc_patch(d3,1,l1,l2,s1,s2);
 % XXn=yc_patch(yc_clip(d-d3,-0.02,0.02),1,l1,l2,s1,s2);
 XXn=yc_patch(yc_bandpass(yc_clip(d-d3,-80,80),0.004,0,60),1,l1,l2,s1,s2);
-[DD,GG]=yc_sgk(XX,param);
+[DD,GG]=dl_sgk(XX,param);
 Gn=yc_ompN(DD,XXn,3);
 perc=1;
-Gn=yc_pthresh(Gn,'ph',perc);
+Gn=dl_pthresh(Gn,'ph',perc);
 Xn=DD*Gn;
 d33=yc_patch_inv(Xn,1,n1,n2,l1,l2,s1,s2);
 % d33=yc_mf(d33,5,1,1);
@@ -139,191 +134,3 @@ save forge_atom.mat DCT DD DD2
 
 
 
-
-% 
-% 
-% T=6;
-% niter=12;
-% K=256;
-% n1=2000;
-% n2=960;
-% n3=1;
-% ll1=32;
-% ll2=16;
-% ll3=1;
-% ss1=8;
-% ss2=8;
-% ss3=1;
-% perc=0.5;
-% ifrobust=1;
-% 
-% %% simultaneous denoising and reconstruction
-% %% SGK
-% param=struct('T',T,'niter',niter,'mode',1,'K',K);
-% mode=1;
-% l1=ll1;
-% l2=ll2;
-% l3=ll3;
-% s1=ss1;
-% s2=ss2;
-% s3=ss3;
-% perc=perc;
-% 
-% %% create initial DCT
-% c1=l1;c2=l2;c3=l3;
-% Dinit=yc_initD([l1,l2,l3],[c1,c2,c3]);
-% Dinit=Dinit(:,1:K);
-% param.D=Dinit;
-% 
-% % %%test yc_initD
-% % l1=4;l2=4;l3=1;
-% % c1=l1;c2=l2;c3=l3;
-% % Dinit=yc_initD([l1,l2,l3],[c1,c2,c3]);
-% % % figure;imagesc(Dinit);
-% 
-% opt=1;%opt=1: update atoms or opt=0 not update
-% % sigma=1.0;
-% % epsi=1.345*sigma;
-% epsi=50;
-% % perc=100;
-% % niter=10;niter=5;
-% niter=5;
-% if ifrobust==0
-%     if n3==1
-%         XX=yc_patch(d1,mode,l1,l2,s1,s2);
-%         XXn=yc_patch(dn-d1,mode,l1,l2,s1,s2);
-%     else
-%         XX=yc_patch3d(d1,mode,l1,l2,l3,s1,s2,s3);
-%         XXn=yc_patch3d(dn-d1,mode,l1,l2,l3,s1,s2,s3);
-%     end
-%     
-%     
-%     tic
-%     [DD,GG]=yc_sgk(XX,param);
-%     toc
-%     
-%     % for reference
-%     %     tic
-%     %     [DDksvd,GGksvd]=yc_ksvd(XX,param);
-%     %     toc
-%     
-%     Gn=yc_ompN(DD,XXn,T);
-%     Gn=yc_pthresh(Gn,'ph',perc);
-%     Xn=DD*Gn;
-%     if n3==1
-%         d11=yc_patch_inv(Xn,mode,n1,n2,l1,l2,s1,s2);
-%     else
-%         d11=yc_patch3d_inv(Xn,mode,n1,n2,n3,l1,l2,l3,s1,s2,s3);
-%     end
-%     d2=d1+d11;
-%     % figure;imagesc([dc,dn,d1,dn-d1,d11,dn-d1-d11]);colormap(seis);
-%     % figure;imagesc([dc,dn,d4,d-d4]);colormap(seis);
-%     
-% else
-%     if opt==0
-%         if n3==1
-%             XX=yc_patch(d1,mode,l1,l2,s1,s2);
-%         else
-%             XX=yc_patch3d(d1,mode,l1,l2,l3,s1,s2,s3);
-%         end
-%     end
-%     tic
-%     m=0;
-%     d2=d1;
-%     for it=1:niter
-%         
-%         n=dn-d1-m;
-%         randn('state',232043124+it);
-% %         n(find(n>epsi | n<-epsi ))=0.01*randn(size(find(n>epsi| n<-epsi)));
-%         n=yc_clip(n,-epsi,epsi);
-%         p=m+0.45*n;
-% %         p=m+n;
-%         
-%         if n3==1
-%             if opt==1
-%                 XX=yc_patch(d2,mode,l1,l2,s1,s2);
-%             end
-%             XXn=yc_patch(p,mode,l1,l2,s1,s2);
-%         else
-%             if opt==1
-%                 XX=yc_patch3d(d2,mode,l1,l2,l3,s1,s2,s3);
-%             end
-%             XXn=yc_patch3d(p,mode,l1,l2,l3,s1,s2,s3);
-%         end
-%         
-%         
-%         [DD,GG]=yc_sgk(XX,param);
-%         
-%         Gn=yc_ompN(DD,XXn,T);
-%         Gn=yc_pthresh(Gn,'ph',perc);
-%         Xn=DD*Gn;
-%         if n3==1
-%             d11=yc_patch_inv(Xn,mode,n1,n2,l1,l2,s1,s2);
-%         else
-%             d11=yc_patch3d_inv(Xn,mode,n1,n2,n3,l1,l2,l3,s1,s2,s3);
-%         end
-%         m=d11;
-%         d2=d1+d11;
-%         
-%         fprintf("iteration = %d/%d \n",it,niter);
-%         
-%         figure(1);yc_imagesc([dn,d1,d11,d2,dn-d2]);pause(0.1);
-%     end
-%     toc
-% end
-% d2=reshape(d2,n1,n2*n3);
-% 
-% figure;yc_imagesc([dn,d1,d11,d2,dn-d2]);
-% 
-% 
-% % rsf_create(denoised2,size(d2)');
-% % rsf_write(d2,denoised2);
-% 
-% figure(1);yc_imagesc([dn,d1,n]);
-% 
-% 
-% 
-% 
-% figure;yc_imagesc([dn,d1,dn-d1,d11,d2,dn-d2]);
-% figure;yc_imagesc([dn,d1,dn-d1,d2,dn-d2]);
-% 
-% % 
-% 
-% % % % 
-% nn=dn-d1;
-% % dd=nn(200:600,1:200);
-% dd=nn;
-% % dd(find(nn>epsi | nn<-epsi ))=0.01*randn(size(find(nn>epsi| nn<-epsi)));
-% % dd=yc_clip(dd,-epsi,epsi);
-% [nn1,nn2]=size(dd);
-% XXn=yc_patch(dd,mode,l1,l2,s1,s2);
-% Gn=yc_ompN(DD,XXn,T);
-% Gn=yc_pthresh(Gn,'ph',perc);
-% Xn=DD*Gn;
-% dd11=yc_patch_inv(Xn,mode,nn1,nn2,l1,l2,s1,s2);
-% d3=d1+dd11;%non-robust version
-% 
-% 
-% figure('units','normalized','Position',[0.2 0.4 0.55, 0.35],'color','w');
-% yc_imagesc([dn,d1,dn-d1,d11,d2,dn-d2,dd11,d3,dn-d3]);
-% print(gcf,'-depsc','-r300','figdas.eps');
-% % save das.mat
-% 
-% % 
-% % % figure;yc_imagesc([dd,dd11,dd-dd11]);
-% % 
-% % 
-% % figure;yc_imagesc([nn,dd11,nn-dd11]);
-% % 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
