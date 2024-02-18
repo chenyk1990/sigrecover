@@ -65,27 +65,25 @@ t=[0:n1-1]*dt;
 x=1:n2;
 indt=1800:2048;indx=190:320;
 indt2=1300:1800;indx2=530:600;
-indt2=1950:2048;indx2=1:100;
-figure('units','normalized','Position',[0.2 0.4 0.8, 0.6],'color','w');
-subplot(2,3,1);imagesc(x,t,d);colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(a)','color','k','Fontsize',20,'fontweight','bold');
-subplot(2,3,2);imagesc(x,t,d3);colormap(seis);caxis([-1,1]);title("jDAS's");yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(b)','color','k','Fontsize',20,'fontweight','bold');
-subplot(2,3,3);imagesc(x,t,d4);colormap(seis);caxis([-1,1]);title('New');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(c)','color','k','Fontsize',20,'fontweight','bold');
-subplot(2,3,4);imagesc(x,t,d33);colormap(seis);caxis([-1,1]);title('Retrieved signal');xlabel('Channel','Fontsize',10,'fontweight','bold');ylabel('Time (s)','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(d)','color','k','Fontsize',20,'fontweight','bold');
-subplot(2,3,5);imagesc(x,t,d-d3);colormap(seis);caxis([-1,1]);title("jDAS's Noise");xlabel('Channel','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(e)','color','k','Fontsize',20,'fontweight','bold');
-subplot(2,3,6);imagesc(x,t,d-d4);colormap(seis);caxis([-1,1]);title('New noise');xlabel('Channel','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-5,'(f)','color','k','Fontsize',20,'fontweight','bold');
-print(gcf,'-dpng','-r300','jdas.png');
-print(gcf,'-depsc','-r300','jdas.eps');
+indt2=1850:2048;indx2=1:100;
+figure('units','normalized','Position',[0.2 0.4 0.6, 1.0],'color','w');
+subplot(6,3,1);imagesc(x,t,d);colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(a)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,2);imagesc(x,t,d3);colormap(seis);caxis([-1,1]);title("jDAS's");yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(b)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,3);imagesc(x,t,d4);colormap(seis);caxis([-1,1]);title('New');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(c)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,4);imagesc(x,t,d33);colormap(seis);caxis([-1,1]);title('Retrieved signal');xlabel('Channel','Fontsize',10,'fontweight','bold');ylabel('Time (s)','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(d)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,5);imagesc(x,t,d-d3);colormap(seis);caxis([-1,1]);title("jDAS's Noise");xlabel('Channel','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(e)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,6);imagesc(x,t,d-d4);colormap(seis);caxis([-1,1]);title('New noise');xlabel('Channel','Fontsize',10,'fontweight','bold');yc_framebox(x(indx(1)),x(indx(end)),t(indt(1)),t(indt(end)),'g',2);yc_framebox(x(indx2(1)),x(indx2(end)),t(indt2(1)),t(indt2(end)),'r',2);set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold');text(-100,-8,'(f)','color','k','Fontsize',20,'fontweight','bold');
 
 % t=1:n1;
 % x=1:n2;
 % indt=1800:2000;indx=200:300;
-figure('units','normalized','Position',[0.2 0.4 0.8, 1.0],'color','w');
-subplot(4,3,1);imagesc(x(indx),t(indt),d(indt,indx));colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');text(160,35,'(a)','color','k','Fontsize',30,'fontweight','bold');
-subplot(4,3,2);imagesc(x(indx),t(indt),d3(indt,indx));colormap(seis);caxis([-1,1]);title("jDAS's");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
-subplot(4,3,3);imagesc(x(indx),t(indt),d4(indt,indx));colormap(seis);caxis([-1,1]);title('New');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
-subplot(4,3,4);imagesc(x(indx),t(indt),d33(indt,indx));colormap(seis);caxis([-1,1]);title('Retrieved signal');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
-subplot(4,3,5);imagesc(x(indx),t(indt),d(indt,indx)-d3(indt,indx));colormap(seis);caxis([-1,1]);title("jDAS's Noise");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
-subplot(4,3,6);imagesc(x(indx),t(indt),d(indt,indx)-d4(indt,indx));colormap(seis);caxis([-1,1]);title('New noise');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
+% figure('units','normalized','Position',[0.2 0.4 0.8, 1.0],'color','w');
+subplot(6,3,6+1);imagesc(x(indx),t(indt),d(indt,indx));colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');text(160,35,'(g)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,6+2);imagesc(x(indx),t(indt),d3(indt,indx));colormap(seis);caxis([-1,1]);title("jDAS's");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
+subplot(6,3,6+3);imagesc(x(indx),t(indt),d4(indt,indx));colormap(seis);caxis([-1,1]);title('New');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
+subplot(6,3,6+4);imagesc(x(indx),t(indt),d33(indt,indx));colormap(seis);caxis([-1,1]);title('Retrieved signal');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
+subplot(6,3,6+5);imagesc(x(indx),t(indt),d(indt,indx)-d3(indt,indx));colormap(seis);caxis([-1,1]);title("jDAS's Noise");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
+subplot(6,3,6+6);imagesc(x(indx),t(indt),d(indt,indx)-d4(indt,indx));colormap(seis);caxis([-1,1]);title('New noise');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','g','ycolor','g');
 % print(gcf,'-dpng','-r300','jdas_z1.png');
 %%
 
@@ -93,15 +91,15 @@ subplot(4,3,6);imagesc(x(indx),t(indt),d(indt,indx)-d4(indt,indx));colormap(seis
 % x=1:n2;
 % indt2=1750:2000;indx2=450:550;
 % figure('units','normalized','Position',[0.2 0.4 0.8, 0.6],'color','w');
-subplot(4,3,7);imagesc(x(indx2),t(indt2),d(indt2,indx2));colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');text(-20,38.6,'(b)','color','k','Fontsize',30,'fontweight','bold');
-subplot(4,3,8);imagesc(x(indx2),t(indt2),d3(indt2,indx2));colormap(seis);caxis([-1,1]);title("jDAS's");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
-subplot(4,3,9);imagesc(x(indx2),t(indt2),d4(indt2,indx2));colormap(seis);caxis([-1,1]);title('New');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
-subplot(4,3,10);imagesc(x(indx2),t(indt2),d33(indt2,indx2));colormap(seis);caxis([-1,1]);title('Retrieved signal');xlabel('Channel','Fontsize',10,'fontweight','bold');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
-subplot(4,3,11);imagesc(x(indx2),t(indt2),d(indt2,indx2)-d3(indt2,indx2));colormap(seis);caxis([-1,1]);xlabel('Channel','Fontsize',10,'fontweight','bold');title("jDAS's noise");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
-subplot(4,3,12);imagesc(x(indx2),t(indt2),d(indt2,indx2)-d4(indt2,indx2));colormap(seis);caxis([-1,1]);xlabel('Channel','Fontsize',10,'fontweight','bold');title('New noise');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
+subplot(6,3,6+7);imagesc(x(indx2),t(indt2),d(indt2,indx2));colormap(seis);caxis([-1,1]);title('Raw');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');text(-20,36.2,'(h)','color','k','Fontsize',20,'fontweight','bold');
+subplot(6,3,6+8);imagesc(x(indx2),t(indt2),d3(indt2,indx2));colormap(seis);caxis([-1,1]);title("jDAS's");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
+subplot(6,3,6+9);imagesc(x(indx2),t(indt2),d4(indt2,indx2));colormap(seis);caxis([-1,1]);title('New');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
+subplot(6,3,6+10);imagesc(x(indx2),t(indt2),d33(indt2,indx2));colormap(seis);caxis([-1,1]);title('Retrieved signal');xlabel('Channel','Fontsize',10,'fontweight','bold');ylabel('Time (s)','Fontsize',10,'fontweight','bold');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
+subplot(6,3,6+11);imagesc(x(indx2),t(indt2),d(indt2,indx2)-d3(indt2,indx2));colormap(seis);caxis([-1,1]);xlabel('Channel','Fontsize',10,'fontweight','bold');title("jDAS's noise");set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
+subplot(6,3,6+12);imagesc(x(indx2),t(indt2),d(indt2,indx2)-d4(indt2,indx2));colormap(seis);caxis([-1,1]);xlabel('Channel','Fontsize',10,'fontweight','bold');title('New noise');set(gca,'Linewidth',2,'Fontsize',10,'Fontweight','bold','xcolor','r','ycolor','r');
 % print(gcf,'-dpng','-r300','jdas_z2.png');
-print(gcf,'-dpng','-r300','jdas_z.png');
-print(gcf,'-depsc','-r300','jdas_z.eps');
+print(gcf,'-dpng','-r300','jdas.png');
+print(gcf,'-depsc','-r300','jdas.eps');
 
 
 
@@ -128,6 +126,7 @@ for ia=1:64
     set(gca,'Linewidth',1.5,'Fontsize',16);
     set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
 end
+print(gcf,'-dpng','-r300','jdas_atoms2.png');
 print(gcf,'-depsc','-r300','jdas_atoms2.eps');
 
 save jdas_atom.mat DCT DD DD2
