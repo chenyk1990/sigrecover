@@ -216,7 +216,7 @@ for ia=[1:16]
     set(gca,'Linewidth',1.5,'Fontsize',16);
     set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
 end
-anno2;
+sr_anno2;
 print(gcf,'-depsc','-r300','wang_patch0.eps');
 
 figure('units','normalized','Position',[0.2 0.4 0.53, 1]);
@@ -225,7 +225,7 @@ for ia=[1:16]
     set(gca,'Linewidth',1.5,'Fontsize',16);
     set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
 end
-anno2;
+sr_anno2;
 print(gcf,'-depsc','-r300','wang_patch1.eps');
 
 figure('units','normalized','Position',[0.2 0.4 0.53, 1]);
@@ -234,7 +234,7 @@ for ia=[1:16]
     set(gca,'Linewidth',1.5,'Fontsize',16);
     set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
 end
-anno2;
+sr_anno2;
 print(gcf,'-depsc','-r300','wang_patch2.eps');
 
 
